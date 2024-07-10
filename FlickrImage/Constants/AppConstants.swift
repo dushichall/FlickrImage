@@ -6,6 +6,7 @@
 //
 
 import Foundation
+/// App constants
 struct AppConstants {
     static let baseURL = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
     static let viewCornerRadius = 6.0
