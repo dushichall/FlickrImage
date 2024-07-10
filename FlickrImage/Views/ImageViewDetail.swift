@@ -16,11 +16,12 @@ struct ImageViewDetail: View {
             ImageView(url: (flickrItem.media?.m) ?? "")
                 .frame(maxWidth: .infinity)
                 .padding(16)
-                .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0))
+                .scaleEffect(isAnimating ? 1.0 : 0.5)
                 .onAppear {
-                    self.isAnimating = true
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0)){
+                        self.isAnimating = true
+                    }
                 }
-
             
             Text(flickrItem.title ?? "")
                 .font(.headline)
@@ -56,7 +57,19 @@ struct ImageViewDetail: View {
         .navigationBarTitle(AppConstants.imageDetailPageTitle, displayMode: .inline)
     }
     private func shareImage() {
-        // Implement image sharing logic here
-        // You can use UIActivityViewController or any other method as per app's requirements
-    }
+            let items = [
+                flickrItem.title,
+                flickrItem.description,
+                "Image URL: \(flickrItem.media?.m ?? "")",
+                "Author: \(flickrItem.author ?? "")",
+                "Published Date: \(flickrItem.published?.formattedPublishedDate ?? "")"
+            ]
+            
+            let activityVC = UIActivityViewController(activityItems: items.compactMap { $0 }, applicationActivities: nil)
+            
+            // Get the current window scene
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                windowScene.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+            }
+        }
 }

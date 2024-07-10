@@ -15,6 +15,7 @@ struct SearchBar: View {
             TextField("Search by name...", text: $text)
                 .padding(6)
                 .cornerRadius(AppConstants.viewCornerRadius)
+                .padding(.leading,AppConstants.viewCornerRadius)
             
             if !text.isEmpty {
                 Button(action: {
