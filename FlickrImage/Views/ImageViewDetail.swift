@@ -22,6 +22,8 @@ struct ImageViewDetail: View {
                         self.isAnimating = true
                     }
                 }
+            //                .accessibilityLabel(Text(flickrItem.title ?? "Image"))
+            //                .accessibilityHint(Text("Double tap to view full image"))
             
             Text(flickrItem.title ?? "")
                 .font(.headline)
@@ -41,20 +43,17 @@ struct ImageViewDetail: View {
                 .padding(.horizontal)
             
             Spacer()
-            Button(action: {
-                            // Implement share functionality here
-                            shareImage()
-                        }) {
-                            Text("Share")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                        }
-                        .padding()
         }
         .navigationBarTitle(AppConstants.imageDetailPageTitle, displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    shareImage()
+                }) {
+                    Image(systemName: "square.and.arrow.up") // Share icon
+                }
+            }
+        }
     }
     private func shareImage() {
             let items = [

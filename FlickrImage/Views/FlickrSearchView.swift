@@ -16,7 +16,7 @@ struct FlickrSearchView: View {
             VStack(spacing: 0) {
                 SearchBar(text: $viewModel.searchText)
                     .padding(10)
-                    .fixedSize(horizontal: false, vertical: true) // Ensure fixed vertical size
+                    .fixedSize(horizontal: false, vertical: true)  // Ensure fixed vertical size
 
                 switch viewModel.apiState {
                     case .idle:

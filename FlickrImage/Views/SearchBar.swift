@@ -16,7 +16,6 @@ struct SearchBar: View {
                 .padding(6)
                 .cornerRadius(AppConstants.viewCornerRadius)
                 .padding(.leading,AppConstants.viewCornerRadius)
-            
             if !text.isEmpty {
                 Button(action: {
                     self.text = ""
