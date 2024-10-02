@@ -10,29 +10,49 @@ import XCTest
 final class FlickrImageUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        // Any initial setup required before each test
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Teardown code after each test
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testSearchFieldExists() {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let searchField = app.searchFields["Search by tags"]
+        XCTAssertTrue(searchField.exists, "The search field should exist.")
+    }
+
+    func testSearchFunctionality() {
+        let app = XCUIApplication()
+        app.launch()
+
+        let searchField = app.searchFields["Search by tags"]
+        searchField.tap()
+        searchField.typeText("Nature")
+        app.keyboards.buttons["Search"].tap()
+
+        // Validate that search results are populated, for simplicity checking a text element
+        XCTAssertTrue(app.staticTexts["Nature"].exists, "The search result should display.")
+    }
+
+    func testImageDetailNavigation() {
+        let app = XCUIApplication()
+        app.launch()
+
+        // Simulate tapping on the first image in the search results
+        let firstImage = app.images.element(boundBy: 0)
+        if firstImage.exists {
+            firstImage.tap()
+            XCTAssertTrue(app.navigationBars["Image Detail"].exists, "Should navigate to Image Detail view.")
+        }
     }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
             measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
