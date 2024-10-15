@@ -22,8 +22,8 @@ struct ImageViewDetail: View {
                         self.isAnimating = true
                     }
                 }
-            //                .accessibilityLabel(Text(flickrItem.title ?? "Image"))
-            //                .accessibilityHint(Text("Double tap to view full image"))
+                            .accessibilityLabel(Text(flickrItem.title ?? "Image"))
+                            .accessibilityHint(Text("Double tap to view full image"))
             
             Text(flickrItem.title ?? "")
                 .font(.headline)
