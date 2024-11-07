@@ -66,7 +66,7 @@ struct FlickrSearchView: View {
 struct FlickrSearchView: View {
     @StateObject private var viewModel = FlickrViewModel()
     @State private var selectedItem: FlickrItem? = nil
-
+                        
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
